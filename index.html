@@ -113,19 +113,4 @@
 
             function carregarPensamentosDoFirestore() {
                 db.collection('pensamentos').orderBy('dataHora', 'desc').onSnapshot(function(querySnapshot) {
-                    // Limpar os pensamentos existentes antes de exibir os novos
-                    pensamentosContainer.innerHTML = '';
-
-                    querySnapshot.forEach(function(doc) {
-                        const { nome, pensamento, dataHora } = doc.data();
-                        exibirPensamento(nome, pensamento, dataHora);
-                    });
-                });
-            }
-
-            // Carregar pensamentos do Firestore ao carregar a página
-            carregarPensamentosDoFirestore();
-        });
-    </script>
-</body>
-</html>
+                    // Limpar os pensamentos exist
