@@ -26,38 +26,4 @@
         <label for="nome">Seu Nome:</label>
         <input type="text" id="nome" name="nome" required>
         <br>
-        <label for="pensamento">Compartilhe seus pensamentos:</label>
-        <textarea id="pensamento" name="pensamento" rows="4" cols="50" required></textarea>
-        <br>
-        <button type="submit">Enviar Pensamento</button>
-    </form>
-
-    <div id="pensamentosContainer">
-        <!-- Os pensamentos serão exibidos aqui -->
-    </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
-
-    <!-- Seu script.js -->
-    <script src="script.js"></script>
-
-    <script>
-        // Configuração do Firebase (substitua com suas próprias credenciais)
-        const firebaseConfig = {
-            apiKey: "AIzaSyDAy_epqmwd4SkhMIkjTsrXUfoMwWTefkU",
-            authDomain: "numeric-amphora-401515.firebaseapp.com",
-            projectId: "numeric-amphora-401515",
-            storageBucket: "numeric-amphora-401515.appspot.com",
-            appId: "1:351165278620:web:SEU_APP_ID"
-        };
-
-        // Inicialize o Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Inicialize o Firestore
-        const db = firebase.firestore();
-    </script>
-</body>
-</html>
+        <label for="pensamento">Compartilhe
