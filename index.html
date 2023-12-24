@@ -36,26 +36,28 @@
         <!-- Os pensamentos serão exibidos aqui -->
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
+
+    <!-- Seu script.js -->
     <script src="script.js"></script>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
 
-<script>
-    // Configuração do Firebase (substitua com suas próprias credenciais)
-    const firebaseConfig = {
-        apiKey: "AIzaSyDAy_epqmwd4SkhMIkjTsrXUfoMwWTefkU",
-        authDomain: "numeric-amphora-401515.firebaseapp.com",
-        projectId: "numeric-amphora-401515",
-        storageBucket: "numeric-amphora-401515.appspot.com",
-        appId: "1:351165278620:web:SEU_APP_ID"
-    };
+    <script>
+        // Configuração do Firebase (substitua com suas próprias credenciais)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAy_epqmwd4SkhMIkjTsrXUfoMwWTefkU",
+            authDomain: "numeric-amphora-401515.firebaseapp.com",
+            projectId: "numeric-amphora-401515",
+            storageBucket: "numeric-amphora-401515.appspot.com",
+            appId: "1:351165278620:web:SEU_APP_ID"
+        };
 
-    // Inicialize o Firebase
-    firebase.initializeApp(firebaseConfig);
+        // Inicialize o Firebase
+        firebase.initializeApp(firebaseConfig);
 
-    // Inicialize o Firestore
-    const db = firebase.firestore();
-</script>
+        // Inicialize o Firestore
+        const db = firebase.firestore();
+    </script>
 </body>
 </html>
