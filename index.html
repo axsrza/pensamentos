@@ -5,15 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Plataforma de Pensamentos</title>
+    <style>
+        /* Adicione algum estilo aqui, se desejar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>Bem-vindo à Minha Plataforma de Pensamentos!</h1>
     
-    <form action="#" method="post">
+    <form id="thoughtForm">
         <label for="pensamento">Compartilhe seus pensamentos:</label>
         <textarea id="pensamento" name="pensamento" rows="4" cols="50"></textarea>
         <br>
         <button type="submit">Enviar Pensamento</button>
     </form>
+
+    <div id="pensamentosContainer">
+        <!-- Os pensamentos serão exibidos aqui -->
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
