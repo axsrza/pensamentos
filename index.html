@@ -26,4 +26,106 @@
         <label for="nome">Seu Nome:</label>
         <input type="text" id="nome" name="nome" required>
         <br>
-        <label for="pensamento">Compartilhe
+        <label for="pensamento">Compartilhe seus pensamentos:</label>
+        <textarea id="pensamento" name="pensamento" rows="4" cols="50" required></textarea>
+        <br>
+        <button type="submit">Enviar Pensamento</button>
+    </form>
+
+    <div id="pensamentosContainer">
+        <!-- Os pensamentos serão exibidos aqui -->
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
+
+    <script>
+        // Configuração do Firebase (substitua com suas próprias credenciais)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAy_epqmwd4SkhMIkjTsrXUfoMwWTefkU",
+            authDomain: "numeric-amphora-401515.firebaseapp.com",
+            projectId: "numeric-amphora-401515",
+            storageBucket: "numeric-amphora-401515.appspot.com",
+            appId: "1:351165278620:web:SEU_APP_ID"
+        };
+
+        // Inicialize o Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Inicialize o Firestore
+        const db = firebase.firestore();
+    </script>
+
+    <script>
+        // script.js
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const thoughtForm = document.getElementById('thoughtForm');
+            const nomeInput = document.getElementById('nome');
+            const pensamentoInput = document.getElementById('pensamento');
+            const pensamentosContainer = document.getElementById('pensamentosContainer');
+
+            thoughtForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const nome = nomeInput.value.trim();
+                const pensamento = pensamentoInput.value.trim();
+
+                if (nome !== '' && pensamento !== '') {
+                    const dataHora = obterDataHoraFormatada();
+                    exibirPensamento(nome, pensamento, dataHora);
+
+                    salvarPensamentoNoFirestore(nome, pensamento, dataHora);
+
+                    nomeInput.value = '';
+                    pensamentoInput.value = '';
+                }
+            });
+
+            function exibirPensamento(nome, pensamento, dataHora) {
+                const divPensamento = document.createElement('div');
+                divPensamento.className = 'pensamento';
+                divPensamento.innerHTML = `<strong>${nome}</strong>: ${pensamento} <span class="data-hora">(${dataHora})</span>`;
+
+                pensamentosContainer.prepend(divPensamento);
+            }
+
+            function obterDataHoraFormatada() {
+                const agora = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+                return agora.toLocaleDateString('pt-BR', options);
+            }
+
+            function salvarPensamentoNoFirestore(nome, pensamento, dataHora) {
+                db.collection('pensamentos').add({
+                    nome: nome,
+                    pensamento: pensamento,
+                    dataHora: dataHora
+                })
+                .then(function(docRef) {
+                    console.log("Pensamento adicionado ao Firestore com ID: ", docRef.id);
+                })
+                .catch(function(error) {
+                    console.error("Erro ao adicionar pensamento ao Firestore: ", error);
+                });
+            }
+
+            function carregarPensamentosDoFirestore() {
+                db.collection('pensamentos').orderBy('dataHora', 'desc').onSnapshot(function(querySnapshot) {
+                    // Limpar os pensamentos existentes antes de exibir os novos
+                    pensamentosContainer.innerHTML = '';
+
+                    querySnapshot.forEach(function(doc) {
+                        const { nome, pensamento, dataHora } = doc.data();
+                        exibirPensamento(nome, pensamento, dataHora);
+                    });
+                });
+            }
+
+            // Carregar pensamentos do Firestore ao carregar a página
+            carregarPensamentosDoFirestore();
+        });
+    </script>
+</body>
+</html>
