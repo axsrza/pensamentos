@@ -37,8 +37,8 @@
     </div>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
         // Configuração do Firebase (substitua com suas próprias credenciais)
@@ -47,7 +47,7 @@
             authDomain: "numeric-amphora-401515.firebaseapp.com",
             projectId: "numeric-amphora-401515",
             storageBucket: "numeric-amphora-401515.appspot.com",
-            appId: "1:351165278620:web:SEU_APP_ID"
+            appId: "351165278620"
         };
 
         // Inicialize o Firebase
@@ -113,4 +113,21 @@
 
             function carregarPensamentosDoFirestore() {
                 db.collection('pensamentos').orderBy('dataHora', 'desc').onSnapshot(function(querySnapshot) {
-                    // Limpar os pensamentos exist
+                    // Limpar os pensamentos existentes antes de exibir os novos
+                    pensamentosContainer.innerHTML =
+                    pensamentosContainer.innerHTML = '';
+
+                    querySnapshot.forEach(function(doc) {
+                        const { nome, pensamento, dataHora } = doc.data();
+                        exibirPensamento(nome, pensamento, dataHora);
+                    });
+                });
+            }
+
+            // Carregar pensamentos do Firestore ao carregar a página
+            carregarPensamentosDoFirestore();
+        });
+    </script>
+</body>
+</html>
+
